@@ -1,7 +1,7 @@
 <?php 
         class TableData{
             private $conn;
-            private $table_db = 'nfc_db_test';
+            private $table_db = 'nfc_match';
 
             private $id_edit;
 

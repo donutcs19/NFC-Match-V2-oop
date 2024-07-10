@@ -29,6 +29,11 @@ if (isset($_POST['submit'])){
     $match->set_nfc($_POST['nfc']);
     $match->set_nfcConfirm($_POST['nfc_cf']);
 
+    if (!$match->CheckNFCvsID()){
+        $alert->display('เลข NFC ตรงกับเลขบัตรประชาชน/พาสปอร์ต','danger');
+        $alert->swal_alert('เลข NFC ตรงกับเลขบัตรประชาชน/พาสปอร์ต','error');
+    }
+
     if(!$match->NFCMatch()){
         $alert->display('เลข NFC ไม่ตรงกัน!!!','danger');
         $alert->swal_alert('เลข NFC ไม่ตรงกัน!!!','error');
@@ -45,6 +50,8 @@ if (isset($_POST['submit'])){
 
         
     }
+
+  
 }
 
 ?>

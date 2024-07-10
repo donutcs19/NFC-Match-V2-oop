@@ -1,9 +1,9 @@
 <?php 
 class Database {
     private $host = "localhost";
-    private $db = "card_rfid";
-    private $username ="";
-    private $password ="";
+    private $db = "oop_crud_app";
+    private $username ="shikikie";
+    private $password ="Kikie@564133";
 
     private $charset = "utf8";
     public $conn;

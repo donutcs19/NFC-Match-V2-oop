@@ -1,7 +1,7 @@
 <?php 
     class NfcMatch {
         private $conn;
-        private $table_db = 'nfc_db_test';
+        private $table_db = 'nfc_match';
 
         public $fname;
         public $lname;
@@ -34,7 +34,14 @@
         $this->nfc_cf = $nfc_cf;
     }
 
-   
+
+    
+    public function CheckNFCvsID(){
+        if ($this->nfc == $this->id_card || $this->nfc_cf == $this->id_card){
+           return false;
+        }
+        return true;
+    } 
        
     public function NFCMatch(){
         if ($this->nfc !== $this->nfc_cf){
@@ -50,8 +57,9 @@
         return true;
     }
 
+
     public function CheckNFC(){
-        $query = "SELECT id FROM {$this->table_db} WHERE rfid = :nfc  LIMIT 1";
+        $query = "SELECT id FROM {$this->table_db} WHERE nfc = :nfc  LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":nfc", $this->nfc);
         $stmt->execute();
@@ -63,11 +71,11 @@
         }
     }
 public function CreateNFC(){
-if (!$this->validateUserInput() || $this->CheckNFC()){
+if (!$this->validateUserInput() || $this->CheckNFC() || !$this->CheckNFCvsID()){
 return false;
 }
 $query ="INSERT INTO {$this->table_db} 
-(firstname, lastname, id_card, rfid, c_rfid, `create_at`, `update_date`, `status`)  
+(fname, lname, id_card, nfc, nfc_cf, `create_at`, `update_at`, `status`)  
 VALUES (:fname, :lname, :id_card, :nfc, :nfc_cf, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'wait')" ;
 $stmt = $this->conn->prepare($query);
 $this->fname = htmlspecialchars(strip_tags($this->fname));
