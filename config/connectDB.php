@@ -2,8 +2,8 @@
 class Database {
     private $host = "localhost";
     private $db = "oop_crud_app";
-    private $username ="shikikie";
-    private $password ="Kikie@564133";
+    private $username ="";
+    private $password ="";
 
     private $charset = "utf8";
     public $conn;
