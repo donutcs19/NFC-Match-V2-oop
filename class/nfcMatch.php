@@ -90,50 +90,50 @@ $stmt->bindParam(":id_card", $this->id_card);
 $stmt->bindParam(":nfc", $this->nfc);
 $stmt->bindParam(":nfc_cf", $this->nfc_cf);
 
-if ($stmt->execute()){
+// if ($stmt->execute()){
 
-    if ($this->nfc != '-' && $this->nfc_cf != '-') {
-        //  AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg token
-        $sToken = "AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg";
-        $sMessage = "\r\n";
-        $sMessage .= "ID No./Passport No. : " . $this->id_card . "\r\n";
-        $sMessage .= "ชื่อ-นามสกุล: " . $this->fname . " " . $this->lname . " \r\n";
-        $sMessage .= "RFID: " . $this->nfc . " \r\n";
-        $sMessage .= "ยืนยัน RFID: " . $this->nfc_cf . " \r\n";
-    } else {
-        //  AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg token
-        $sToken = "AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg";
-        $sMessage = "\r\n";
-        $sMessage .= "ID No./Passport No. : " . $this->id_card . "\r\n";
-        $sMessage .= "ชื่อ-นามสกุล: " . $this->fname . " " . $this->lname . " \r\n";
-        $sMessage .= "ไม่มีบัตรขอใช้งานผ่าน MJU Mobile\r\n";
-    }
+//     if ($this->nfc != '-' && $this->nfc_cf != '-') {
+//         //  AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg token
+//         $sToken = "AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg";
+//         $sMessage = "\r\n";
+//         $sMessage .= "ID No./Passport No. : " . $this->id_card . "\r\n";
+//         $sMessage .= "ชื่อ-นามสกุล: " . $this->fname . " " . $this->lname . " \r\n";
+//         $sMessage .= "RFID: " . $this->nfc . " \r\n";
+//         $sMessage .= "ยืนยัน RFID: " . $this->nfc_cf . " \r\n";
+//     } else {
+//         //  AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg token
+//         $sToken = "AhWyoU0fhG6Nj5QPw36Hnw7E0MhtPu3BTywpNYsM2yg";
+//         $sMessage = "\r\n";
+//         $sMessage .= "ID No./Passport No. : " . $this->id_card . "\r\n";
+//         $sMessage .= "ชื่อ-นามสกุล: " . $this->fname . " " . $this->lname . " \r\n";
+//         $sMessage .= "ไม่มีบัตรขอใช้งานผ่าน MJU Mobile\r\n";
+//     }
 
 
-    $chOne = curl_init();
-    curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
-    curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($chOne, CURLOPT_POST, 1);
-    curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=" . $sMessage);
-    $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $sToken . '',);
-    curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($chOne);
+//     $chOne = curl_init();
+//     curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+//     curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+//     curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+//     curl_setopt($chOne, CURLOPT_POST, 1);
+//     curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=" . $sMessage);
+//     $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' . $sToken . '',);
+//     curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+//     curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+//     $result = curl_exec($chOne);
 
-    //Result error 
-    if (curl_error($chOne)) {
-        echo 'error:' . curl_error($chOne);
-    } else {
-        $result_ = json_decode($result, true);
-        // echo "status : " . $result_['status'];
-        // echo "message : " . $result_['message'];
-    }
-    curl_close($chOne);
-    return true;
-}else{
-    return false;
-}
+//     //Result error 
+//     if (curl_error($chOne)) {
+//         echo 'error:' . curl_error($chOne);
+//     } else {
+//         $result_ = json_decode($result, true);
+//         // echo "status : " . $result_['status'];
+//         // echo "message : " . $result_['message'];
+//     }
+//     curl_close($chOne);
+//     return true;
+// }else{
+//     return false;
+// }
 
 }
 
